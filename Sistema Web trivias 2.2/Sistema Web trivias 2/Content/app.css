@@ -1,0 +1,48 @@
+.form-horizontal .form-group 
+{
+	margin-left: 0px;
+	margin-right: 0px;
+	
+}
+
+.form-horizontal .has-feedback .form-control-feedback 
+{
+	right: 0px;
+}
+
+.help-block
+{
+	margin-bottom: 0px;
+}
+
+.info-box
+{
+	border-radius: 4px;
+}
+
+.logo-img 
+{
+    height: 75%;
+    width: auto;
+}
+
+.login-logo > img 
+{
+    position: relative;
+    height: 60px;
+    width: auto;
+}
+
+.chart
+{
+	padding: 10px;
+}
+
+.datepicker:before, .datepicker:after 
+{
+    content: none;
+}
+
+.skin-blue .wrapper {
+    background: #e1e5ec;
+}

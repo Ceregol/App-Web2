@@ -1,0 +1,62 @@
+﻿@model Sistema_Web_trivias_2.Models.Trivia
+
+@{
+    ViewBag.Title = "DetallesTrivia";
+}
+
+<h2></h2>
+
+<div class="panel panel-info">
+    <div class="panel-heading">Detalles de una trivia</div>
+    <div class="panel-body">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Id_trivia)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Id_trivia)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Nombre)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Descripcion)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FechaDeCreacion)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FechaDeCreacion)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Nombre_Categoria)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Nombre_Categoria)
+            </dd>
+
+        </dl>
+    </div>
+</div>
+
+
+
+
+
+
+

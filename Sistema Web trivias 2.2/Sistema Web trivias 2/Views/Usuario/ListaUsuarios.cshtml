@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Sistema_Web_trivias_2.Models.Usuario>
+
+@{
+    ViewBag.Title = "ListaUsuarios";
+}
+
+<h2>ListaUsuarios</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id_Login)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id_Login)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>
+        
+        <td>@Html.ActionLink("Editar", "Editar", "Usuario", new { id = @item.Id_Login }, new { @class = "btn btn-warning" }) </td>
+        <td>@Html.ActionLink("Eliminar", "Eliminar", "Usuario", new { id = @item.Id_Login }, new { @class = "btn btn-warning" }) </td>
+
+    </tr>
+}
+
+</table>

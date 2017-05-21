@@ -1,0 +1,65 @@
+﻿@model Sistema_Web_trivias_2.Models.Trivia
+
+@{
+    ViewBag.Title = "EliminarTrivia";
+}
+            @if (Session["sessionEmail"] != null)
+            {
+                <div class="panel panel-primary">
+                    <div class="panel-heading">¿Estas seguro que quieres eliminar esta trivia?</div>
+                    <div class="panel-body">
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Id_trivia)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Id_trivia)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Nombre)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Nombre)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Descripcion)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Descripcion)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.FechaDeCreacion)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.FechaDeCreacion)
+                            </dd>
+
+                        </dl>
+
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-actions no-color">
+                                <input type="submit" value="Delete" class="btn btn-default" />
+
+                            </div>
+
+                        }
+                    </div>
+                </div>
+            }
+            else
+            {
+                <h1>Debe estar autentificado</h1>
+            }
+
+
+
+

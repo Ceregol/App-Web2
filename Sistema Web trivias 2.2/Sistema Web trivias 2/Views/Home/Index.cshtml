@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@{
+    if (User.IsInRole("Administrador"))
+    {
+        <h1>
+            Usted es admin ir a trivias
+        </h1>
+    }
+    else
+    {
+        <h1>
+            Usted NO admin
+        </h1>
+    }
+}

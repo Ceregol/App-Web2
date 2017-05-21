@@ -1,0 +1,52 @@
+-controlador
+-vista
+-modelo (todas)
+-procedimiento almacenados
+
+Cosas funcionando
+-lista preguntas
+-crear Preguntas 
+-lista Trivias
+-crear trivia
+- seleccionar preguntas de una trivia 
+-auto id alternativas, preguntas y trivias
+-flujo de crear trivia con preguntas 
+-auto id para trivia, preguntas y tabla pregunta_trivia
+-crear alternativas
+-se creo Profesor_Seleccionar, Profesor_Seleccionarxrut, profesor_crear, profesor_trivia
+Alternativas ok
+1) por cada trivia generar el codigo(su propia id)
+
+Vistas Faltantes
+
+-Estadisticas 
+
+Faltantes: 
+
+2) Revisarque todo funcione 
+3) ver lo de categoria
+3) amononar la cosa
+
+-mostrar las preguntas de una trivia en detalle (categoria tabla) (modales)
+-insertar categorias
+-estadisticas
+-generar el codigo
+-usuario cruds login
+-manejo de errores
+-editar, eliminar alternativas
+- en crear trivia, dropdown de categoria
+
+
+COSAS DEL LOGIN
+ver lo del login
+- se hicieron los procedimientos almacenados
+- se modificio la clase usuario
+- se hizo la clase profesor
+- se agrego la clase utils (sesion manager etc)
+- se dejara usuario 
+- Categorias 
+- Juntar detalles con lista de preguntas
+
+
+NOTA: (cosas a hacer)
+usuario es abstracta, personal = profesor, conductor = alumno 

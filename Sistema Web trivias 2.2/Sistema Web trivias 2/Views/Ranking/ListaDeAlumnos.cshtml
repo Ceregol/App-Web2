@@ -4,19 +4,87 @@
     ViewBag.Title = "ListaDeAlumnos";
 }
 
-<h2>PuntajeDePreguntas</h2>
 
 
+<section class="content-header">
+    <h1>
+        Ranking
+        <small>Alumnos</small>
+    </h1>
+</section>
 
-<div class="row">
-    <div class="col-md-6">
-        <canvas id="chart_1" style="height: 300px; width: 500px;"></canvas>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Puntaje de Preguntas</h3>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <canvas id="chart_1" style="height: 300px; width: 500px;"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <a class="btn btn-default" href="http://localhost:49275/trivia/ListaTrivia">Volver</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Todos los alumnos</h3>
+                </div>
+                <div class="box-body">
+                    <div class="row table-responsive no-left-right-margin">
+                        <div class="col-xs-12">
+                            <table id="table" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width="10%">ID Login</th>
+                                        <th width="70%">Email</th>
+                                        <th width="15%" class="no-sort">Estadísticas</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Id_Login)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Email)
+                                            </td>
+                                            <td>
+                                                <center>
+                                                    <a class="btn bg-purple btn-xs" href=@Url.Action("Index", "Ranking", new { id = @item.Id_Login })
+                                                       data-toggle="tooltip" data-original-title="Ver Estadística del alumno"><i class="fa fa-pie-chart"></i></a>
+                                                </center>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</section>
 
 
-<script>
-    //some configs
+@section scripts
+{
+    <script>
+        //some configs
 
         Chart.defaults.global.responsive = true;
         Chart.defaults.global.maintainAspectRatio = false;
@@ -53,107 +121,114 @@
                 borderColor: 'rgba(255, 159, 64, 1)',
             }
         ];
-</script>
+    </script>
 
-<script>
+    <script>
 
-    var array = [];
-    var labels = [];
+        var array = [];
+        var labels = [];
 
-    $(document).ready(function () {
-        $.ajax({
-            type: 'GET',
-            url: 'http://localhost:49275/Ranking/PuntajeDePreguntasJson',
-            data: {},
-            dataType: 'json',
-            success: function (data) {
-                $.each(data, function (index, element) {
-                    array.push(element.PuntajeObtenidoPP);
-                    labels.push(element.Id_Pregunta);
-                });
-                graph(array, labels);
-            }
-        });
-    });
-
-    function graph(data,labels) {
-        var ctx = document.getElementById("chart_1");
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Numero de veces contestada correctamente',
-                    data: data,
-                    backgroundColor: colors[1].backgroundColor,
-                    borderColor: colors[1].borderColor,
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    xAxes: [{
-                        display: true,
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Numero de la pregunta'
-                        },
-                        gridLines: {
-                            //color: 'rgba(255, 255, 255, 0.5)'
-                        }
-                    }],
-                    yAxes: [{
-                        display: true,
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Puntajes'
-                        },
-                        gridLines: {
-                            //color: 'rgba(255, 255, 255, 0.5)'
-                        },
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
+        $(document).ready(function () {
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:49275/Ranking/PuntajeDePreguntasJson',
+                data: {},
+                dataType: 'json',
+                success: function (data) {
+                    $.each(data, function (index, element) {
+                        array.push(element.PuntajeObtenidoPP);
+                        labels.push(element.Id_Pregunta);
+                    });
+                    graph(array, labels);
                 }
-            }
+            });
         });
-    };
+
+        function graph(data, labels) {
+            var ctx = document.getElementById("chart_1");
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Numero de veces contestada correctamente',
+                        data: data,
+                        backgroundColor: colors[1].backgroundColor,
+                        borderColor: colors[1].borderColor,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Numero de la pregunta'
+                            },
+                            gridLines: {
+                                //color: 'rgba(255, 255, 255, 0.5)'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Puntajes'
+                            },
+                            gridLines: {
+                                //color: 'rgba(255, 255, 255, 0.5)'
+                            },
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        };
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#table').DataTable({
+                "responsive": true,
+                "order": [1, "asc"],
+                "columnDefs": [
+                    { targets: 'no-sort', orderable: false }
+                ],
+                "paging": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true,
+
+                "language": {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                },
+            });
+        });
 </script>
 
-
-
-
-
-
-<h2>ListaDeAlumnos</h2>
-
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Id_Login)
-        </th>
-
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Id_Login)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        
-        <td> @Html.ActionLink("Ver Estadisticas Alumno", "Index", "Ranking", new { id = @item.Id_Login }, new { @class = "btn btn-success" }) </td>
-
-    </tr>
 }
-
-</table>

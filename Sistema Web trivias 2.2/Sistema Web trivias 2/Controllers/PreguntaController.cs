@@ -16,9 +16,16 @@ namespace Sistema_Web_trivias_2.Controllers
         }
         public ActionResult CrearPregunta(int id)
         {
-            Pregunta model = new Pregunta();
-            model.Id_Trivia = id; 
-            return View(model);
+            if (Session["sessionEmail"] != null)
+            {
+                Pregunta model = new Pregunta();
+                model.Id_Trivia = id;
+                return View(model);
+            }
+            else
+            {
+                return Redirect("/");
+            }
         }
 
         [HttpPost]
@@ -31,14 +38,21 @@ namespace Sistema_Web_trivias_2.Controllers
 
         public ActionResult EditarPregunta(int id)
         {
-            var lista = new Models.Pregunta();
-            if (lista.Seleccionar(id))
+            if (Session["sessionEmail"] != null)
             {
-                return View(lista);
+                var lista = new Models.Pregunta();
+                if (lista.Seleccionar(id))
+                {
+                    return View(lista);
+                }
+                else
+                {
+                    return View(string.Empty);
+                }
             }
             else
             {
-                return View(string.Empty);
+                return Redirect("/");
             }
         }
         [HttpPost]
@@ -49,22 +63,36 @@ namespace Sistema_Web_trivias_2.Controllers
         }
         public ActionResult EliminarPregunta(int id)
         {
-            var lista = new Models.Pregunta();
-            if (lista.Seleccionar(id))
+            if (Session["sessionEmail"] != null)
             {
-                return View(lista);
+                var lista = new Models.Pregunta();
+                if (lista.Seleccionar(id))
+                {
+                    return View(lista);
+                }
+                else
+                {
+                    return View(string.Empty);
+                }
             }
             else
             {
-                return View(string.Empty);
+                return Redirect("/");
             }
         }
         
 
         public ActionResult ListaAlternativas(int id)
         {
-            var Pregunta = new Pregunta();
-            return View(Pregunta.LLenarAlternativas(id));
+            if (Session["sessionEmail"] != null)
+            {
+                var Pregunta = new Pregunta();
+                return View(Pregunta.LLenarAlternativas(id));
+            }
+            else
+            {
+                return Redirect("/");
+            }
         }
         [HttpPost]
         public ActionResult EliminarPregunta(int id, Models.Pregunta listaAEditar)
@@ -74,22 +102,35 @@ namespace Sistema_Web_trivias_2.Controllers
         }
         public ActionResult ListaPregunta()
         {
-            var Pregunta = new Pregunta();
-            return View(Pregunta.ListaPreguntas());   
+            if (Session["sessionEmail"] != null)
+            {
+                var Pregunta = new Pregunta();
+                return View(Pregunta.ListaPreguntas());
+            }
+            else
+            {
+                return Redirect("/");
+            }
         }
 
         public ActionResult DetallesPregunta(int id)
         {
-            var lista = new Models.Pregunta();
-            if (lista.Seleccionar(id))
+            if (Session["sessionEmail"] != null)
             {
-                return View(lista);
+                var lista = new Models.Pregunta();
+                if (lista.Seleccionar(id))
+                {
+                    return View(lista);
+                }
+                else
+                {
+                    return View(string.Empty);
+                }
             }
             else
             {
-                return View(string.Empty);
+                return Redirect("/");
             }
-
         }
 
     }

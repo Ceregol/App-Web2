@@ -7,7 +7,7 @@
 <section class="content-header">
     <h1>
         Trivias
-        <small>Lista</small>
+        <small>Todas</small>
     </h1>
 </section>
 
@@ -16,53 +16,80 @@
         <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Matemáticas</h3>
+                    <h3 class="box-title">Todas las Trivias</h3>
                 </div>
                 <div class="box-body">
-                    <table id="table" class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>Nº</th>
-                                <th>Nombre Trivia</th>
-                                <th>Fecha de Creación</th>
-                                <th>Editar</th>
-                                <th>Eliminar</th>
-                                <th>Detalles</th>
-                                <th>Ver Lista de Preguntas</th>
-                                <th>Agregar Preguntas</th>
-                                <th>Estadísticas</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td class="text-center">
-                                        @Html.DisplayFor(modelItem => item.Id_trivia)
-                                    </td>
-                                    <td class="text-center">
-                                        @Html.DisplayFor(modelItem => item.Nombre)
-                                    </td>
-                                    <td class="text-center">
-                                        @Html.DisplayFor(modelItem => item.FechaDeCreacion)
-                                    </td>
-                                    <!--
-                                    <td class="no-sort"> @Html.ActionLink("Editar", "EditarTrivia", "Trivia", new { id = @item.Id_trivia }, new { @class = "btn btn-warning" }) </td>
-                                    -->
-                                    <td class="no-sort">
-                                        <center>
-                                            <a class="btn btn-primary btn-flat btn-xs" href=@Url.Action("EditarTrivia", "Trivia", new { id = @item.Id_trivia })><i class="fa fa-edit"></i></a>
-                                        </center>
-                                    </td>
-                                    <td class="no-sort"> @Html.ActionLink("Eliminar ", "EliminarTrivia", "Trivia", new { id = @item.Id_trivia }, new { @class = "btn btn-danger" }) </td>
-                                    <td class="no-sort"> @Html.ActionLink("Detalles", "DetallesTrivia", "Trivia", new { id = @item.Id_trivia }, new { @class = "btn btn-info" }) </td>
-                                    <td class="no-sort"> @Html.ActionLink("Lista De Preguntas", "listaPreguntas", "Trivia", new { id = @item.Id_trivia }, new { @class = "btn btn-primary" }) </td>
-                                    <td class="no-sort"> @Html.ActionLink("Crear Pregunta", "CrearPregunta", "Pregunta", new { id = @item.Id_trivia }, new { @class = "btn btn-success" }) </td>
-                                    <td class="no-sort"> @Html.ActionLink("Ver estadisticas", "ListaDeAlumnos", "Ranking", new { id = @item.Id_trivia }, new { @class = "btn btn-success" }) </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+                    <div class="row table-responsive no-left-right-margin">
+                        <div class="col-xs-12">
+                            <table id="table" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Nº</th>
+                                        <th>Nombre Trivia</th>
+                                        <th>Categoría</th>
+                                        <th class="no-sort">Editar</th>
+                                        <th class="no-sort">Eliminar</th>
+                                        <th class="no-sort">Detalles</th>
+                                        <th class="no-sort">Preguntas</th>
+                                        <th class="no-sort">Crear Preguntas</th>
+                                        <th class="no-sort">Estadísticas</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td class="text-center">
+                                                @Html.DisplayFor(modelItem => item.Id_trivia)
+                                            </td>
+                                            <td class="text-center">
+                                                @Html.DisplayFor(modelItem => item.Nombre)
+                                            </td>
+                                            <td class="text-center">
+                                                @Html.DisplayFor(modelItem => item.Nombre_Categoria)
+                                            </td>
+                                            <td>
+                                                <center>
+                                                    <a class="btn btn-warning btn-xs" href=@Url.Action("EditarTrivia", "Trivia", new { id = @item.Id_trivia })
+                                                       data-toggle="tooltip" data-original-title="Editar Trivia"><i class="fa fa-pencil"></i></a>
+                                                </center>
+                                            </td>
+                                            <td>
+                                                <center>
+                                                    <a class="btn btn-danger btn-xs" href=@Url.Action("EliminarTrivia", "Trivia", new { id = @item.Id_trivia })
+                                                       data-toggle="tooltip" data-original-title="Eliminar Trivia"><i class="fa fa-trash"></i></a>
+                                                </center>
+                                            </td>
+                                            <td>
+                                                <center>
+                                                    <a class="btn bg-teal btn-xs" href=@Url.Action("DetallesTrivia", "Trivia", new { id = @item.Id_trivia })
+                                                       data-toggle="tooltip" data-original-title="Detalles de la Trivia"><i class="fa fa-eye"></i></a>
+                                                </center>
+                                            </td>
+                                            <td>
+                                                <center>
+                                                    <a class="btn bg-teal btn-xs" href=@Url.Action("listaPreguntas", "Trivia", new { id = @item.Id_trivia })
+                                                       data-toggle="tooltip" data-original-title="Ver Todas las Preguntas"><i class="fa fa-list"></i></a>
+                                                </center>
+                                            </td>
+                                            <td>
+                                                <center>
+                                                    <a class="btn bg-olive btn-xs" href=@Url.Action("CrearPregunta", "Pregunta", new { id = @item.Id_trivia })
+                                                       data-toggle="tooltip" data-original-title="Agregar Pregunta"><i class="fa fa-plus"></i></a>
+                                                </center>
+                                            </td>
+                                            <td>
+                                                <center>
+                                                    <a class="btn bg-purple btn-xs" href=@Url.Action("ListaDeAlumnos", "Ranking", new { id = @item.Id_trivia })
+                                                       data-toggle="tooltip" data-original-title="Ver Estadística"><i class="fa fa-pie-chart"></i></a>
+                                                </center>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -70,7 +97,7 @@
 </section>
 
 
-
+<!--
     <div class="modal " id="crearTrivia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -156,7 +183,7 @@
             </div>
         </div>
     </div>
-
+-->
 
 @section scripts
 {

@@ -4,56 +4,60 @@
     ViewBag.Title = "DetallesTrivia";
 }
 
-<h2></h2>
 
-<div class="panel panel-info">
-    <div class="panel-heading">Detalles de una trivia</div>
-    <div class="panel-body">
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Id_trivia)
-            </dt>
+<section class="content-header">
+    <h1>
+        Trivia
+        <small>Detalle</small>
+    </h1>
+</section>
 
-            <dd>
-                @Html.DisplayFor(model => model.Id_trivia)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Nombre)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Descripcion)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.FechaDeCreacion)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.FechaDeCreacion)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Nombre_Categoria)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Nombre_Categoria)
-            </dd>
-
-        </dl>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Detalle Trivia N°: @Html.DisplayFor(model => model.Id_trivia) </h3>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Nombre</label>
+                                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control", @disabled="disabled" } })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Fecha de creación</label>
+                                @Html.EditorFor(model => model.FechaDeCreacion, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Categoría</label>
+                                @Html.EditorFor(model => model.Nombre_Categoria, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Descripción</label>
+                                @Html.TextAreaFor(model => model.Descripcion, new { @class = "form-control", @rows = "3", @disabled = "disabled" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <a class="btn btn-default" href="http://localhost:49275/trivia/ListaTrivia">Volver</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-
+</section>
 
 
 

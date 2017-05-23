@@ -94,5 +94,13 @@ namespace Sistema_Web_trivias_2.Controllers
             return RedirectToAction("ListaUsuarios");
         }
 
+        [HttpPost]
+        public ActionResult CerrarSesion()
+        {
+            Session.RemoveAll();
+            Session.Abandon();
+
+            return Redirect("/");
+        }
     }
 }

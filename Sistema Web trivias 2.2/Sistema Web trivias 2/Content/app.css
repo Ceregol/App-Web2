@@ -46,3 +46,10 @@
 .skin-blue .wrapper {
     background: #e1e5ec;
 }
+
+@media (max-width: 1001px) {
+    .no-left-right-margin {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+}

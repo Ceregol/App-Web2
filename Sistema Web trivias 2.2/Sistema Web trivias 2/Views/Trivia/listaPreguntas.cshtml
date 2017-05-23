@@ -5,50 +5,132 @@
 }
 
 
-<div class="panel panel-primary">
-    <div class="panel-heading">Lista de Preguntas</div>
-    <div class="panel-body">
-        <table class="table table-striped">
-            <tr>
-                <th>
-                   ID 
-                </th>
-                <th>
-                    Pregunta
-                </th>
-                <th>
-                    Lista 
-                </th>
-                <th>
-                    Crear 
-                </th>
-                <th>
-                    Editar 
-                </th>
-                <th>
-                    Eliminar 
-                </th>
-                <th></th>
-            </tr>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Id_Pregunta)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Question)
-                    </td>
-                    <td> @Html.ActionLink("ListaAlternativas", "ListaAlternativas", "Pregunta", new { id = @item.Id_Pregunta }, new { @class = "btn btn-info" }) </td>
-                    <td> @Html.ActionLink("CrearAlternativa", "CrearAlternativa", "Alternativa", new { id = @item.Id_Pregunta }, new { @class = "btn btn-success" }) </td>
-                    <td> @Html.ActionLink("EditarPregunta", "EditarPregunta", "Pregunta", new { id = @item.Id_Pregunta }, new { @class = "btn btn-warning" }) </td>
-                    <td> @Html.ActionLink("EliminarPregunta", "EliminarPregunta", "Pregunta", new { id = @item.Id_Pregunta }, new { @class = "btn btn-danger" }) </td>
 
-                </tr>
-            }
 
-        </table>
+<section class="content-header">
+    <h1>
+        Preguntas
+        <small>Todas</small>
+    </h1>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Todas las Preguntas</h3>
+                </div>
+                <div class="box-body">
+                    <div class="row table-responsive no-left-right-margin">
+                        <div class="col-xs-12">
+                            <table id="table" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width="10%">ID</th>
+                                        <th width="50%">Pregunta</th>
+                                        <th class="no-sort">Editar</th>
+                                        <th class="no-sort">Eliminar</th>
+                                        <th class="no-sort">Alternativas</th>
+                                        <th class="no-sort">Crear Alternativa</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Id_Pregunta)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Question)
+                                            </td>
+
+                                            <td>
+                                                <center>
+                                                    <a class="btn btn-warning btn-xs" href=@Url.Action("EditarPregunta", "Pregunta", new { id = @item.Id_Pregunta })
+                                                       data-toggle="tooltip" data-original-title="Editar Pregunta"><i class="fa fa-pencil"></i></a>
+                                                </center>
+                                            </td>
+                                            <td>
+                                                <center>
+                                                    <a class="btn btn-danger btn-xs" href=@Url.Action("EliminarPregunta", "Pregunta", new { id = @item.Id_Pregunta })
+                                                       data-toggle="tooltip" data-original-title="Eliminar Pregunta"><i class="fa fa-trash"></i></a>
+                                                </center>
+                                            </td>
+
+                                            <td>
+                                                <center>
+                                                    <a class="btn bg-teal btn-xs" href=@Url.Action("ListaAlternativas", "Pregunta", new { id = @item.Id_Pregunta })
+                                                       data-toggle="tooltip" data-original-title="Ver Todas las Alternativas"><i class="fa fa-list"></i></a>
+                                                </center>
+                                            </td>
+                                            <td>
+                                                <center>
+                                                    <a class="btn bg-olive btn-xs" href=@Url.Action("CrearAlternativa", "Alternativa", new { id = @item.Id_Pregunta })
+                                                       data-toggle="tooltip" data-original-title="Agregar Alternativa"><i class="fa fa-plus"></i></a>
+                                                </center>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <a class="btn btn-default" href="http://localhost:49275/trivia/ListaTrivia">Volver</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</section>
 
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#table').DataTable({
+                "responsive" : true,
+                "order": [1, "asc"],
+                "columnDefs": [
+                    { targets: 'no-sort', orderable: false }
+                ],
+                "paging": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true,
 
+                "language": {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                },
+            });
+        });
+    </script>
+}

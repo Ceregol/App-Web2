@@ -17,9 +17,14 @@ namespace Sistema_Web_trivias_2.Controllers
         }
         public ActionResult CrearTrivia()
         {
-
- 
-            return View();
+            if (Session["sessionEmail"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return Redirect("/");
+            }
         }
         [HttpPost]
         public ActionResult CrearTrivia(Models.Trivia listaACrear)
@@ -30,14 +35,21 @@ namespace Sistema_Web_trivias_2.Controllers
         }
         public ActionResult EditarTrivia(int id)
         {
-            var lista = new Models.Trivia();
-            if (lista.Seleccionar(id))
+            if (Session["sessionEmail"] != null)
             {
-                return View(lista);
+                var lista = new Models.Trivia();
+                if (lista.Seleccionar(id))
+                {
+                    return View(lista);
+                }
+                else
+                {
+                    return View(string.Empty);
+                }
             }
             else
             {
-                return View(string.Empty);
+                return Redirect("/");
             }
         }
         [HttpPost]
@@ -48,14 +60,21 @@ namespace Sistema_Web_trivias_2.Controllers
         }
         public ActionResult EliminarTrivia(int id)
         {
-            var lista = new Models.Trivia();
-            if (lista.Seleccionar(id))
+            if (Session["sessionEmail"] != null)
             {
-                return View(lista);
+                var lista = new Models.Trivia();
+                if (lista.Seleccionar(id))
+                {
+                    return View(lista);
+                }
+                else
+                {
+                    return View(string.Empty);
+                }
             }
             else
             {
-                return View(string.Empty);
+                return Redirect("/");
             }
         }
         [HttpPost]
@@ -66,25 +85,47 @@ namespace Sistema_Web_trivias_2.Controllers
         }
         public ActionResult ListaTrivia()
         {
-            var Trivia = new Trivia();
-            return View(Trivia.ListaTrivias());
+            if (Session["sessionEmail"] != null)
+            {
+                var Trivia = new Trivia();
+                return View(Trivia.ListaTrivias());
+            }
+            else
+            {
+                return Redirect("/");
+            }
+
         }
         public ActionResult ListaPreguntas(int id)
         {
-            var Trivia = new Trivia();
-            return View(Trivia.LLenarPreguntas(id));
+            if (Session["sessionEmail"] != null)
+            {
+                var Trivia = new Trivia();
+                return View(Trivia.LLenarPreguntas(id));
+            }
+            else
+            {
+                return Redirect("/");
+            }
         }
 
         public ActionResult DetallesTrivia(int id)
         {
-            var lista = new Models.Trivia();
-            if (lista.Seleccionar(id))
+            if (Session["sessionEmail"] != null)
             {
-                return View(lista);
+                var lista = new Models.Trivia();
+                if (lista.Seleccionar(id))
+                {
+                    return View(lista);
+                }
+                else
+                {
+                    return View(string.Empty);
+                }
             }
             else
             {
-                return View(string.Empty);
+                return Redirect("/");
             }
 
         }
